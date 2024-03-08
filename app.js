@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const invoiceRoutes = require('./routes/invoiceRoutes');
+const indexRoutes = require('./routes/indexRoutes');
 const { sequelize } = require('./models');
 
 const app = express();
@@ -18,7 +19,8 @@ sequelize.sync({ force: false }).then(() => {
 });
 
 // Routes
-app.use('/users', invoiceRoutes);
+app.use('/', indexRoutes);
+app.use('/invoices', invoiceRoutes);
 
 // Start the server
 app.listen(port, () => {

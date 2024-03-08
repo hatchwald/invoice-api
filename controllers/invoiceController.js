@@ -2,7 +2,12 @@ const { Invoice } = require('../models');
 
 const getAllInvoices = async (req, res) => {
     try {
-        const invoices = await Invoice.findAll();
+        const page = parseInt(req.query.page) || 1;
+        const pageSize = parseInt(req.query.pageSize) || 10;
+        const invoices = await Invoice.findAll({
+            offset: (page - 1) * pageSize,
+            limit: pageSize
+        });
         res.json(invoices);
     } catch (error) {
         console.error(error);

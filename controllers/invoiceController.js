@@ -4,11 +4,17 @@ const getAllInvoices = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
         const pageSize = parseInt(req.query.pageSize) || 10;
-        const invoices = await Invoice.findAll({
+        const { count, rows } = await Invoice.findAndCountAll({
             offset: (page - 1) * pageSize,
             limit: pageSize
         });
-        res.json(invoices);
+        const totalPage = Math.ceil(count / pageSize)
+        res.json({
+            'data': rows,
+            'totalItems': count,
+            totalPage,
+            'currentPage': page
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });

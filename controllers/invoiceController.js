@@ -17,8 +17,7 @@ const getAllInvoices = async (req, res) => {
 
 const createInvoice = async (req, res, next) => {
     const { invoice_no, date, customer, salesperson, payment_type, notes } = req.body;
-    console.log(req.body)
-    const requiredField = ['date', 'customer', 'salesperson'];
+    const requiredField = ['date', 'customer', 'salesperson', 'products'];
     try {
         requiredField.forEach(field => {
             if (!req.body[field]) {

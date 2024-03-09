@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'productSold',
   });
   productSold.associate = models => {
-    productSold.belongsTo(models.Invoice, { foreignKey: 'invoice_no' });
+    productSold.belongsTo(models.Invoice, { foreignKey: 'invoice_no', targetKey: 'invoice_no' });
   };
 
   return productSold;

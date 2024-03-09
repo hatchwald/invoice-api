@@ -28,5 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Invoice',
   });
+  Invoice.associate = models => {
+    Invoice.hasMany(models.productSold, { foreignKey: 'invoice_no', sourceKey: 'invoice_no', onDelete: 'CASCADE' });
+  };
   return Invoice;
 };

@@ -5,6 +5,7 @@ const getAllInvoices = async (req, res) => {
         const page = parseInt(req.query.page) || 1;
         const pageSize = parseInt(req.query.pageSize) || 10;
         const { count, rows } = await Invoice.findAndCountAll({
+            include: [{ model: productSold, attributes: ['item', 'quantity', 'total_cogs', 'total_price'] }],
             offset: (page - 1) * pageSize,
             limit: pageSize
         });

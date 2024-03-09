@@ -3,9 +3,10 @@ const bodyParser = require('body-parser');
 const invoiceRoutes = require('./routes/invoiceRoutes');
 const indexRoutes = require('./routes/indexRoutes');
 const { sequelize } = require('./models');
+require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
